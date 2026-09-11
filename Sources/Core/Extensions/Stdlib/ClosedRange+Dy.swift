@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - 整数闭区间 (Int) 的随机值扩展
-public extension ClosedRange where Bound == Int {
+public extension ClosedRange<Int> {
     /// 返回区间内的一个随机整数
     ///
     /// - Returns: 区间 `[lowerBound, upperBound]` 内的随机值
@@ -17,7 +17,7 @@ public extension ClosedRange where Bound == Int {
 }
 
 // MARK: - 整数闭区间的偏移操作扩展
-public extension ClosedRange where Bound == Int {
+public extension ClosedRange<Int> {
     /// 返回偏移后的区间
     ///
     /// - Parameter offset: 要偏移的整数值(正数向右,负数向左)

@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - 类型转换
-public extension Range where Bound == String.Index {
+public extension Range<String.Index> {
     /// 将 `Range<String.Index>` 转换为 `NSRange`
     ///
     /// - Parameter string: 所属的原始字符串（必须包含此范围,否则行为未定义）
@@ -19,7 +19,7 @@ public extension Range where Bound == String.Index {
 }
 
 // MARK: - 整数半开区间（Range<Int>）操作扩展
-public extension Range where Bound == Int {
+public extension Range<Int> {
     /// 返回区间内的一个随机整数
     ///
     /// - Returns: 半开区间 `[lowerBound, upperBound)` 内的随机整数值
