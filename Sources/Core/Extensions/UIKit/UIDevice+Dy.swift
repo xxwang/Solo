@@ -20,15 +20,13 @@ public extension UIDevice {
         return space.int64Value
     }
 
-    /// 可用磁盘容量(字节),优先使用 iOS 11+ 的重要用途容量
+    /// 可用磁盘容量(字节),优先使用重要用途容量
     static var dy_freeDiskCapacityInBytes: Int64 {
         let homeURL = URL(fileURLWithPath: NSHomeDirectory())
-        if #available(iOS 11.0, *) {
-            do {
-                let values = try homeURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
-                return values.volumeAvailableCapacityForImportantUsage ?? 0
-            } catch {}
-        }
+        do {
+            let values = try homeURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
+            return values.volumeAvailableCapacityForImportantUsage ?? 0
+        } catch {}
 
         if let attrs = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()),
            let free = attrs[.systemFreeSize] as? NSNumber
@@ -81,7 +79,7 @@ public extension UIDevice {
 public extension UIDevice {
     /// 获取当前连接的 Wi-Fi 网络信息(SSID 和 BSSID)
     /// ⚠️ 需在 Xcode Capabilities 中启用 "Access WiFi Information"
-    /// ⚠️ iOS 13+ 后台或未连接 VPN 时可能返回 (nil, nil)
+    /// ⚠️ 后台或未连接 VPN 时可能返回 (nil, nil)
     static var dy_connectedWiFiNetwork: (ssid: String?, bssid: String?) {
         guard let interfaces = CNCopySupportedInterfaces() as? [String] else {
             return (nil, nil)

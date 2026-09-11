@@ -19,7 +19,6 @@ public extension String {
     ///   - hierarchicalColor: 分层图标颜色
     ///   - configuration: 配置对象
     /// - Returns: `UIImage?`
-    @available(iOS 15.0, *)
     func dy_hierarchicalSymbol(
         hierarchicalColor: UIColor,
         configuration: UIImage.SymbolConfiguration? = nil
@@ -32,7 +31,6 @@ public extension String {
     ///   - paletteColors: 调色板图标颜色数组
     ///   - configuration: 配置对象
     /// - Returns: `UIImage?`
-    @available(iOS 15.0, *)
     func dy_paletteSymbol(
         paletteColors: [UIColor],
         configuration: UIImage.SymbolConfiguration? = nil
@@ -43,7 +41,6 @@ public extension String {
     /// 创建多色图标
     /// - Parameter configuration: 配置对象
     /// - Returns: `UIImage?`
-    @available(iOS 15.0, *)
     func dy_multicolorSymbol(
         configuration: UIImage.SymbolConfiguration? = nil
     ) -> UIImage? {

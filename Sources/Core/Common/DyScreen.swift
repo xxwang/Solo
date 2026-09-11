@@ -142,14 +142,10 @@ public extension DyScreen {
 // MARK: - 屏幕捕获检测
 public extension DyScreen {
     /// 当前是否正在录屏或投屏
-    /// iOS 11+ 优先使用 Scene API; 低版本回退到 UIScreen.main
     static var isCaptured: Bool {
-        if #available(iOS 11.0, *) {
-            let scene = UIApplication.shared.connectedScenes
-                .first { $0.activationState == .foregroundActive } as? UIWindowScene
-            return scene?.screen.isCaptured ?? false
-        }
-        return UIScreen.main.isCaptured
+        let scene = UIApplication.shared.connectedScenes
+            .first { $0.activationState == .foregroundActive } as? UIWindowScene
+        return scene?.screen.isCaptured ?? false
     }
 }
 

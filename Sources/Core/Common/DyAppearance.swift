@@ -55,9 +55,7 @@ public extension DyAppearance {
         tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.contentInsetAdjustmentBehavior = .never
 
-        if #available(iOS 15.0, *) {
-            tableView.sectionHeaderTopPadding = 0
-        }
+        tableView.sectionHeaderTopPadding = 0
     }
 
     /// 设置所有 `UIScrollView` 及其子类(如 `UITableView`, `UICollectionView`)
@@ -132,9 +130,7 @@ public extension DyAppearance {
         tabBar.isTranslucent = translucent
         tabBar.standardAppearance = appearance
 
-        if #available(iOS 15.0, *) {
-            tabBar.scrollEdgeAppearance = appearance
-        }
+        tabBar.scrollEdgeAppearance = appearance
     }
 }
 
@@ -163,8 +159,6 @@ public extension UITableView {
         self.sectionFooterHeight = UITableView.automaticDimension
         self.contentInsetAdjustmentBehavior = .never
 
-        if #available(iOS 15.0, *) {
-            self.sectionHeaderTopPadding = 0
-        }
+        self.sectionHeaderTopPadding = 0
     }
 }

@@ -55,13 +55,9 @@ public extension DyHelper {
         return UIDevice.current.identifierForVendor?.uuidString
     }
 
-    /// 广告标识符(IDFA)：仅在用户授权广告追踪后可用(iOS 14+ 需显式请求权限)
+    /// 广告标识符(IDFA)：仅在用户授权广告追踪后可用(需先请求 ATT 权限)
     var advertisingIdentifier: String? {
-        if #available(iOS 14, *) {
-            guard ATTrackingManager.trackingAuthorizationStatus == .authorized else { return nil }
-        } else {
-            guard ASIdentifierManager.shared().isAdvertisingTrackingEnabled else { return nil }
-        }
+        guard ATTrackingManager.trackingAuthorizationStatus == .authorized else { return nil }
         return ASIdentifierManager.shared().advertisingIdentifier.uuidString
     }
 }

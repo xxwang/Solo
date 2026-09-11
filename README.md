@@ -46,7 +46,7 @@ Swift Package Manager：
 // Xcode: File → Add Package Dependency → 输入仓库 URL
 ```
 
-平台要求：**iOS 13.0+**，无任何第三方依赖。
+平台要求：**iOS 15.0+**，无任何第三方依赖。
 
 ---
 
@@ -407,7 +407,7 @@ dy_logError("解析失败")
 - **双入口** — 实例 `object.dy` 与类型 `Type.dy`（配置静态/类属性）。
 - **值类型安全** — `.with` 返回副本，不改原值。
 - **健壮回退** — 字体字族、资源加载等不可用时优雅回退，不 crash。
-- **iOS 13+** — 兼容旧设备，同时适配 iOS 16+ Scene API。
+- **iOS 15+** — 最低支持版本，同时适配 iOS 16+ Scene API。
 
 ## 目录结构
 

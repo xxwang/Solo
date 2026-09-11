@@ -20,9 +20,7 @@ public extension DyWrapper where Base: UITabBar {
         let appearance = base.standardAppearance
         isTranslucent ? appearance.configureWithTransparentBackground() : appearance.configureWithOpaqueBackground()
         base.standardAppearance = appearance
-        if #available(iOS 15.0, *) {
-            base.scrollEdgeAppearance = appearance
-        }
+        base.scrollEdgeAppearance = appearance
         return self
     }
 
@@ -44,9 +42,7 @@ public extension DyWrapper where Base: UITabBar {
             appearance.stackedLayoutAppearance.selected.titleTextAttributes = attributes
         }
         base.standardAppearance = appearance
-        if #available(iOS 15.0, *) {
-            base.scrollEdgeAppearance = appearance
-        }
+        base.scrollEdgeAppearance = appearance
 
         return self
     }
@@ -69,9 +65,7 @@ public extension DyWrapper where Base: UITabBar {
             appearance.stackedLayoutAppearance.selected.titleTextAttributes = attributes
         }
         base.standardAppearance = appearance
-        if #available(iOS 15.0, *) {
-            base.scrollEdgeAppearance = appearance
-        }
+        base.scrollEdgeAppearance = appearance
 
         return self
     }
@@ -90,9 +84,7 @@ public extension DyWrapper where Base: UITabBar {
             appearance.stackedLayoutAppearance.selected.iconColor = color
         }
         base.standardAppearance = appearance
-        if #available(iOS 15.0, *) {
-            base.scrollEdgeAppearance = appearance
-        }
+        base.scrollEdgeAppearance = appearance
         return self
     }
 
@@ -105,9 +97,7 @@ public extension DyWrapper where Base: UITabBar {
         appearance.backgroundColor = color
         appearance.backgroundEffect = nil
         base.standardAppearance = appearance
-        if #available(iOS 15.0, *) {
-            base.scrollEdgeAppearance = appearance
-        }
+        base.scrollEdgeAppearance = appearance
 
         return self
     }
@@ -121,9 +111,7 @@ public extension DyWrapper where Base: UITabBar {
         appearance.backgroundImage = backgroundImage
         appearance.backgroundEffect = nil
         base.standardAppearance = appearance
-        if #available(iOS 15.0, *) {
-            base.scrollEdgeAppearance = appearance
-        }
+        base.scrollEdgeAppearance = appearance
 
         return self
     }
@@ -137,9 +125,7 @@ public extension DyWrapper where Base: UITabBar {
         appearance.stackedLayoutAppearance.normal.titlePositionAdjustment = offset
         appearance.stackedLayoutAppearance.selected.titlePositionAdjustment = offset
         base.standardAppearance = appearance
-        if #available(iOS 15.0, *) {
-            base.scrollEdgeAppearance = appearance
-        }
+        base.scrollEdgeAppearance = appearance
         return self
     }
 
@@ -151,15 +137,12 @@ public extension DyWrapper where Base: UITabBar {
         let appearance = base.standardAppearance
         appearance.shadowImage = shadowImage?.withRenderingMode(.alwaysOriginal)
         base.standardAppearance = appearance
-        if #available(iOS 15.0, *) {
-            base.scrollEdgeAppearance = appearance
-        }
+        base.scrollEdgeAppearance = appearance
         return self
     }
 
     /// 设置滚动时外观与标准外观一致
     /// - Returns: `Self`
-    @available(iOS 15.0, *)
     @discardableResult
     func scrollEdgeAppearance() -> Self {
         let appearance = base.standardAppearance

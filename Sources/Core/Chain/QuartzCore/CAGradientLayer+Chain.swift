@@ -6,7 +6,7 @@ public extension DyWrapper where Base: CAGradientLayer {
     /// 设置渐变类型
     /// - Parameter type: 渐变类型
     ///   - `.axial`：线性渐变(默认)
-    ///   - `.radial`：径向渐变(iOS 12+)
+    ///   - `.radial`：径向渐变
     /// - Returns: `Self`
     @discardableResult
     func type(_ type: CAGradientLayerType) -> Self {

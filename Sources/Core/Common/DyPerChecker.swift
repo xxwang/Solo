@@ -1,4 +1,3 @@
-import AdSupport
 import AppTrackingTransparency
 import AVFoundation
 import Contacts
@@ -170,15 +169,10 @@ private extension DyPerChecker {
 // MARK: - 相册权限
 private extension DyPerChecker {
     /// 查询相册授权状态。
-    /// - Note: iOS 14+ 使用 `authorizationStatus(for: .readWrite)`;旧版本使用旧 API。
+    /// - Note: 使用 `authorizationStatus(for: .readWrite)`。
     ///   `.limited`(用户仅选了部分照片)也视为已授权。
     func checkPhotoLibrary() -> DyPerStatus {
-        let status: PHAuthorizationStatus = {
-            if #available(iOS 14, *) {
-                return PHPhotoLibrary.authorizationStatus(for: .readWrite)
-            }
-            return PHPhotoLibrary.authorizationStatus()
-        }()
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         switch status {
         case .notDetermined: return .notDetermined
         case .denied, .restricted: return .denied
@@ -187,7 +181,7 @@ private extension DyPerChecker {
         }
     }
 
-    /// 请求相册权限。iOS 14+ 使用 `requestAuthorization(for: .readWrite, handler:)`。
+    /// 请求相册权限,使用 `requestAuthorization(for: .readWrite, handler:)`。
     /// - Note: 系统回调可能在非主线程触发,这里统一派发到主线程后再回调。
     func requestPhotoLibrary(completion: @escaping DyAction1<DyPerReqResult>) {
         let handler: DyAction1<PHAuthorizationStatus> = { status in
@@ -200,11 +194,7 @@ private extension DyPerChecker {
             }()
             DispatchQueue.main.async { completion(result) }
         }
-        if #available(iOS 14, *) {
-            PHPhotoLibrary.requestAuthorization(for: .readWrite, handler: handler)
-        } else {
-            PHPhotoLibrary.requestAuthorization(handler)
-        }
+        PHPhotoLibrary.requestAuthorization(for: .readWrite, handler: handler)
     }
 }
 
@@ -276,30 +266,22 @@ private extension DyPerChecker {
 // MARK: - 广告追踪权限(IDFA)
 private extension DyPerChecker {
     /// 查询广告追踪(IDFA)授权状态。
-    /// - Note: iOS 14+ 使用 ATT(`ATTrackingManager`);旧版本使用 `isAdvertisingTrackingEnabled`。
+    /// - Note: 使用 ATT(`ATTrackingManager`)。
     func checkAdTracking() -> DyPerStatus {
-        if #available(iOS 14, *) {
-            switch ATTrackingManager.trackingAuthorizationStatus {
-            case .notDetermined: return .notDetermined
-            case .denied, .restricted: return .denied
-            case .authorized: return .authorized
-            @unknown default: return .denied
-            }
+        switch ATTrackingManager.trackingAuthorizationStatus {
+        case .notDetermined: return .notDetermined
+        case .denied, .restricted: return .denied
+        case .authorized: return .authorized
+        @unknown default: return .denied
         }
-        return ASIdentifierManager.shared().isAdvertisingTrackingEnabled ? .authorized : .denied
     }
 
-    /// 请求广告追踪授权。iOS 14+ 弹 ATT 弹窗;旧版本直接读取 `isAdvertisingTrackingEnabled` 并异步回调。
+    /// 请求广告追踪授权,弹出 ATT 弹窗。
     func requestAdTracking(completion: @escaping DyAction1<DyPerReqResult>) {
-        if #available(iOS 14, *) {
-            ATTrackingManager.requestTrackingAuthorization { status in
-                let result: DyPerReqResult = (status == .authorized)
-                    ? .authorized : .denied(reason: .userDenied)
-                DispatchQueue.main.async { completion(result) }
-            }
-        } else {
-            let granted = ASIdentifierManager.shared().isAdvertisingTrackingEnabled
-            DispatchQueue.main.async { completion(granted ? .authorized : .denied(reason: .userDenied)) }
+        ATTrackingManager.requestTrackingAuthorization { status in
+            let result: DyPerReqResult = (status == .authorized)
+                ? .authorized : .denied(reason: .userDenied)
+            DispatchQueue.main.async { completion(result) }
         }
     }
 }
@@ -308,12 +290,7 @@ private extension DyPerChecker {
 private extension DyPerChecker {
     /// 查询定位授权状态。
     func checkLocation() -> DyPerStatus {
-        let status: CLAuthorizationStatus = {
-            if #available(iOS 14, *) {
-                return locationManager.authorizationStatus
-            }
-            return CLLocationManager.authorizationStatus()
-        }()
+        let status = locationManager.authorizationStatus
         switch status {
         case .notDetermined: return .notDetermined
         case .denied, .restricted: return .denied
@@ -327,12 +304,7 @@ private extension DyPerChecker {
     ///   系统不会再弹窗、也不会触发 delegate 回调,此时必须在此直接回调并 return,否则调用方会永久等不到 completion。
     ///   只有 `.notDetermined` 才进入 delegate 等待路径。
     func requestLocation(type: DyPerReqType.LocationDyPerReqType, completion: @escaping DyAction1<DyPerReqResult>) {
-        let current: CLAuthorizationStatus = {
-            if #available(iOS 14, *) {
-                return locationManager.authorizationStatus
-            }
-            return CLLocationManager.authorizationStatus()
-        }()
+        let current = locationManager.authorizationStatus
         guard current == .notDetermined else {
             DispatchQueue.main.async { completion(self.locationResult(for: current)) }
             return
@@ -363,7 +335,6 @@ extension DyPerChecker: CLLocationManagerDelegate {
         finishLocationAuth(status)
     }
 
-    @available(iOS 14.0, *)
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         finishLocationAuth(manager.authorizationStatus)
     }

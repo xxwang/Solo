@@ -69,9 +69,7 @@ import WebKit
             .showsVerticalScrollIndicator(false)
             .cellLayoutMarginsFollowReadableWidth(false)
 
-        if #available(iOS 15.0, *) {
-            tableView.sectionHeaderTopPadding(0)
-        }
+        tableView.sectionHeaderTopPadding(0)
         return tableView.build()
     }
 }
@@ -130,56 +128,48 @@ import WebKit
     }
 
     /// 创建一个纯文本样式的 `UIButton`
-    @available(iOS 15.0, *)
     open class func plain() -> UIButton {
         let configuration = UIButton.Configuration.plain()
         return UIButton(configuration: configuration)
     }
 
     /// 创建一个着色样式的 `UIButton`
-    @available(iOS 15.0, *)
     open class func tinted() -> UIButton {
         let configuration = UIButton.Configuration.tinted()
         return UIButton(configuration: configuration)
     }
 
     /// 创建一个灰色样式的 `UIButton`
-    @available(iOS 15.0, *)
     open class func gray() -> UIButton {
         let configuration = UIButton.Configuration.gray()
         return UIButton(configuration: configuration)
     }
 
     /// 创建一个填充样式的 `UIButton`
-    @available(iOS 15.0, *)
     open class func filled() -> UIButton {
         let configuration = UIButton.Configuration.filled()
         return UIButton(configuration: configuration)
     }
 
     /// 创建一个无边框样式的 `UIButton`
-    @available(iOS 15.0, *)
     open class func borderless() -> UIButton {
         let configuration = UIButton.Configuration.borderless()
         return UIButton(configuration: configuration)
     }
 
     /// 创建一个边框样式的 `UIButton`
-    @available(iOS 15.0, *)
     open class func bordered() -> UIButton {
         let configuration = UIButton.Configuration.bordered()
         return UIButton(configuration: configuration)
     }
 
     /// 创建一个着色边框样式的 `UIButton`
-    @available(iOS 15.0, *)
     open class func borderedTinted() -> UIButton {
         let configuration = UIButton.Configuration.borderedTinted()
         return UIButton(configuration: configuration)
     }
 
     /// 创建一个突出边框样式的 `UIButton`
-    @available(iOS 15.0, *)
     open class func borderedProminent() -> UIButton {
         let configuration = UIButton.Configuration.borderedProminent()
         return UIButton(configuration: configuration)

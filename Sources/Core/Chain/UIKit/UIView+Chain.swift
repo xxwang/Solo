@@ -321,7 +321,6 @@ public extension DyWrapper where Base: UIView {
     /// 限制最小字体尺寸
     /// - Parameter category: 最小字体尺寸
     /// - Returns: `Self`
-    @available(iOS 15.0, *)
     @discardableResult
     func minimumContentSizeCategory(_ category: UIContentSizeCategory?) -> Self {
         base.minimumContentSizeCategory = category
@@ -331,7 +330,6 @@ public extension DyWrapper where Base: UIView {
     /// 限制最大字体尺寸
     /// - Parameter category: 最大字体尺寸
     /// - Returns: `Self`
-    @available(iOS 15.0, *)
     @discardableResult
     func maximumContentSizeCategory(_ category: UIContentSizeCategory?) -> Self {
         base.maximumContentSizeCategory = category
@@ -360,7 +358,6 @@ public extension DyWrapper where Base: UIView {
     /// 设置焦点组标识符
     /// - Parameter identifier: 焦点组的唯一标识符
     /// - Returns: `Self`
-    @available(iOS 14.0, *)
     @discardableResult
     func focusGroupIdentifier(_ identifier: String?) -> Self {
         base.focusGroupIdentifier = identifier
@@ -370,7 +367,6 @@ public extension DyWrapper where Base: UIView {
     /// 设置焦点组优先级
     /// - Parameter priority: 焦点组的优先级
     /// - Returns: `Self`
-    @available(iOS 15.0, *)
     @discardableResult
     func focusGroupPriority(_ priority: UIFocusGroupPriority) -> Self {
         base.focusGroupPriority = priority
@@ -380,7 +376,6 @@ public extension DyWrapper where Base: UIView {
     /// 设置焦点效果
     /// - Parameter effect: 应用于视图的焦点视觉效果
     /// - Returns: `Self`
-    @available(iOS 15.0, *)
     @discardableResult
     func focusEffect(_ effect: UIFocusEffect?) -> Self {
         base.focusEffect = effect

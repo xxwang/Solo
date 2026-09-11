@@ -64,9 +64,7 @@ public extension UIApplication {
             if #available(iOS 16.0, *) {
                 AppStore.requestReview(in: windowScene)
             } else {
-                if #available(iOS 14.0, *) {
-                    SKStoreReviewController.requestReview(in: windowScene)
-                }
+                SKStoreReviewController.requestReview(in: windowScene)
             }
         }
     }

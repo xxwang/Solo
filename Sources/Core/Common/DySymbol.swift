@@ -32,7 +32,6 @@ public final class DySymbol {
     ///   - hierarchicalColor: 分层图标颜色
     ///   - configuration: 配置对象
     /// - Returns: `UIImage?`
-    @available(iOS 15.0, *)
     public static func hierarchical(
         for name: String,
         hierarchicalColor: UIColor,
@@ -60,7 +59,6 @@ public final class DySymbol {
     ///   - paletteColors: 调色板图标颜色数组
     ///   - configuration: 配置对象
     /// - Returns: `UIImage?`
-    @available(iOS 15.0, *)
     public static func palette(
         for name: String,
         paletteColors: [UIColor],
@@ -87,7 +85,6 @@ public final class DySymbol {
     ///   - name: 图标名称,需为多色符号(如 `"folder"`, `"alarm"`)
     ///   - configuration: 配置对象
     /// - Returns: `UIImage?`
-    @available(iOS 15.0, *)
     public static func multicolor(
         for name: String,
         configuration: UIImage.SymbolConfiguration? = nil

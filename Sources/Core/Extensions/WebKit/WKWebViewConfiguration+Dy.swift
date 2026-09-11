@@ -10,11 +10,7 @@ public extension WKWebViewConfiguration {
         // 是否禁止渐进式渲染(即等待整个页面加载完成后再显示)
         configuration.suppressesIncrementalRendering = false
         // 是否允许执行网页中的 JavaScript(默认就是 true)
-        if #available(iOS 14.0, *) {
-            configuration.defaultWebpagePreferences.allowsContentJavaScript = true
-        } else {
-            configuration.preferences.javaScriptEnabled = true
-        }
+        configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         // 是否允许 JavaScript 自动打开新窗口(如 window.open)设为 false 可防止恶意弹窗
         configuration.preferences.javaScriptCanOpenWindowsAutomatically = false
         // 设置最小字体大小(防止网页使用过小文字影响可读性)

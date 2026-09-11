@@ -41,23 +41,21 @@ public extension DyScreenCaptureMonitor {
             self.onScreenshot?()
         }
 
-        // 监听录屏(iOS 11+)
-        if #available(iOS 11.0, *) {
+        // 监听录屏
+        if DyScreen.isCaptured {
+            self.onRecordingStart?()
+        }
+
+        captureObserver = NotificationCenter.default.addObserver(
+            forName: UIScreen.capturedDidChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self else { return }
             if DyScreen.isCaptured {
                 self.onRecordingStart?()
-            }
-
-            captureObserver = NotificationCenter.default.addObserver(
-                forName: UIScreen.capturedDidChangeNotification,
-                object: nil,
-                queue: .main
-            ) { [weak self] _ in
-                guard let self else { return }
-                if DyScreen.isCaptured {
-                    self.onRecordingStart?()
-                } else {
-                    self.onRecordingStop?()
-                }
+            } else {
+                self.onRecordingStop?()
             }
         }
 

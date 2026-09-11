@@ -50,23 +50,10 @@ public extension URL {
         URL(fileURLWithPath: self.path.dy_expandingTildeInPath)
     }
 
-    /// 获取 MIME 类型(支持 iOS 14+ 和降级方案)
+    /// 获取 MIME 类型
     var dy_mimeType: String? {
-        if #available(iOS 14.0, *) {
-            let ext = self.pathExtension.lowercased()
-            return UTType(filenameExtension: ext)?.preferredMIMEType
-        } else {
-            // iOS <14 手动映射常见扩展名
-            let mimeMap: [String: String] = [
-                "jpg": "image/jpeg", "jpeg": "image/jpeg",
-                "png": "image/png", "gif": "image/gif",
-                "pdf": "application/pdf",
-                "txt": "text/plain",
-                "mp4": "video/mp4", "mov": "video/quicktime",
-                "mp3": "audio/mpeg", "wav": "audio/wav",
-            ]
-            return mimeMap[self.pathExtension.lowercased()]
-        }
+        let ext = self.pathExtension.lowercased()
+        return UTType(filenameExtension: ext)?.preferredMIMEType
     }
 
     /// 将 URL 指向的内容读取为 Data(⚠️ 仅建议用于本地文件！网络 URL 会阻塞线程)

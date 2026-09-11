@@ -105,7 +105,6 @@ public extension DyWrapper where Base == UIImage.SymbolConfiguration {
     /// 设置分层颜色
     /// - Parameter hierarchicalColor: 分层颜色
     /// - Returns: `Self`
-    @available(iOS 15.0, *)
     @discardableResult
     func hierarchicalColor(_ hierarchicalColor: UIColor) -> Self {
         let configuration = UIImage.SymbolConfiguration(hierarchicalColor: hierarchicalColor)
@@ -116,7 +115,6 @@ public extension DyWrapper where Base == UIImage.SymbolConfiguration {
     /// 设置调色板
     /// - Parameter paletteColors: 调色板
     /// - Returns: `Self`
-    @available(iOS 15.0, *)
     @discardableResult
     func paletteColors(_ paletteColors: [UIColor]) -> Self {
         let configuration = UIImage.SymbolConfiguration(paletteColors: paletteColors)
@@ -126,7 +124,6 @@ public extension DyWrapper where Base == UIImage.SymbolConfiguration {
 
     /// 多色渲染偏好
     /// - Returns: `Self`
-    @available(iOS 15.0, *)
     @discardableResult
     func preferringMulticolor() -> Self {
         let configuration = UIImage.SymbolConfiguration.preferringMulticolor()

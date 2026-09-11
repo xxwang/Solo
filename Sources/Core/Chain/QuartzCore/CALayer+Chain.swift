@@ -84,13 +84,11 @@ public extension DyWrapper where Base: CALayer {
         return self
     }
 
-    /// 设置指定角的圆角(iOS 11+ 高效实现,旧版本自动降级)
+    /// 设置指定角的圆角
     /// - Parameters:
     ///   - radius: 圆角半径
     ///   - corners: 要圆角化的角(如 `.topLeft`, `.bottomRight` 等)
     /// - Returns: `Self`
-    /// - Important: 在 iOS < 11 时,此方法依赖 `bounds` 已确定若图层尺寸后续变化,
-    ///   需手动重新调用或自行管理 mask 更新
     @discardableResult
     func roundedCorners(_ radius: CGFloat, corners: CACornerMask) -> Self {
         base.cornerRadius = max(radius, 0)

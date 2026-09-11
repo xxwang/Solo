@@ -104,7 +104,7 @@ public extension UIImage {
     /// - Parameters:
     ///   - lightImageName: 浅色模式下的图片名称
     ///   - darkImageName: 深色模式下的图片名称(可选,默认使用浅色图片)
-    /// - Returns: 真正随系统外观切换的动态图片(iOS 13+) 或浅色图片(iOS 12及以下)
+    /// - Returns: 真正随系统外观切换的动态图片
     ///
     /// - Example:
     ///
@@ -120,7 +120,7 @@ public extension UIImage {
     /// - Parameters:
     ///   - light: 浅色模式下的图片
     ///   - dark: 深色模式下的图片(可选,默认使用浅色图片)
-    /// - Returns: 真正随系统外观切换的动态图片(iOS 13+) 或浅色图片(iOS 12及以下)
+    /// - Returns: 真正随系统外观切换的动态图片
     ///
     /// - Example:
     ///
@@ -130,16 +130,13 @@ public extension UIImage {
         return dy_makeDynamicImage(light: light, dark: dark)
     }
 
-    /// 基于 `UIImageAsset` 构建真正随 trait 环境切换的深浅色动态图片(iOS 13+)
+    /// 基于 `UIImageAsset` 构建真正随 trait 环境切换的深浅色动态图片
     private static func dy_makeDynamicImage(light: UIImage, dark: UIImage?) -> UIImage {
         let darkImage = dark ?? light
-        if #available(iOS 13.0, *) {
-            let asset = UIImageAsset()
-            asset.register(light, with: UITraitCollection(userInterfaceStyle: .light))
-            asset.register(darkImage, with: UITraitCollection(userInterfaceStyle: .dark))
-            return asset.image(with: .current)
-        }
-        return light
+        let asset = UIImageAsset()
+        asset.register(light, with: UITraitCollection(userInterfaceStyle: .light))
+        asset.register(darkImage, with: UITraitCollection(userInterfaceStyle: .dark))
+        return asset.image(with: .current)
     }
 }
 
@@ -1177,7 +1174,7 @@ public extension UIImage {
     ///   - renderingMode: 渲染模式,默认为 `.alwaysOriginal`(若需模板着色,应传 `.alwaysTemplate`)
     /// - Returns: 着色后的新图像;若失败则返回原图
     ///
-    /// > ⚠️ 注意：此方法在 iOS 13+ 才可用低版本请使用 `tint` 或确保图像为 `.alwaysTemplate` 模式
+    /// > ⚠️ 注意：着色需图像为 `.alwaysTemplate` 渲染模式,否则不生效
     func dy_tintColor(with color: UIColor, renderingMode: UIImage.RenderingMode = .alwaysOriginal) -> UIImage {
         return self.withTintColor(color).withRenderingMode(renderingMode)
     }
@@ -1718,8 +1715,7 @@ public extension UIImage {
             return data
 
         case let .asset(name):
-            guard #available(iOS 14.0, *), // 与最低支持版本对齐
-                  !name.isEmpty,
+            guard !name.isEmpty,
                   let asset = NSDataAsset(name: name),
                   !asset.data.isEmpty
             else {

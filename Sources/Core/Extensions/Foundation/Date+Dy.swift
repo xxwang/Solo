@@ -700,7 +700,7 @@ public extension Date {
     /// - note: 此枚举用于统一控制月份和星期名称的格式,
     ///         对应常见的三种本地化形式：宽(完整)、缩写、窄(单字符)
     enum DyDateNameStyle {
-        case narrow // 窄形式,如 "J"(January)、"T"(Thursday),通常为单个字符(iOS 13+ 支持)
+        case narrow // 窄形式,如 "J"(January)、"T"(Thursday),通常为单个字符
         case abbreviated // 缩写形式,如 "Jan"、"Thu"
         case wide // 宽形式(完整名称),如 "January"、"Thursday"
     }
@@ -712,7 +712,6 @@ public extension Date {
     /// - Note:
     ///   - 使用 `standalone` 形式的符号(如 `veryShortStandaloneMonthSymbols`),
     ///     因为这些名称是独立显示的(例如在日历或选择器中),而非嵌入句子
-    ///   - 在 iOS 13 之前,系统不提供 `veryShort...` 符号,窄样式会回退到缩写形式
     func dy_monthName(style: DyDateNameStyle = .wide) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale.current
@@ -749,7 +748,7 @@ public extension Date {
     /// - Returns: 对应样式的星期名称字符串(如 "Thursday"、"Thu" 或 "T")
     /// - Note:
     ///   - 星期索引以 `星期日为起始(0)`,符合 `DateFormatter` 的符号数组顺序
-    ///   - 同样优先使用 `standalone` 形式的窄符号(iOS 13+)
+    ///   - 同样优先使用 `standalone` 形式的窄符号
     ///   - 若需“周一作为一周开始”的逻辑,请勿在此处理——名称数组顺序由 locale 决定,
     ///     而非业务逻辑
     func dy_dayName(style: DyDateNameStyle = .wide) -> String {

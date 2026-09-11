@@ -38,7 +38,7 @@ public extension DyWrapper where Base: UIStackView {
         return self
     }
 
-    /// 为指定的排列子视图之后设置自定义间距(仅 iOS 11 及以上,Dy 最低支持 iOS 14,故安全使用)
+    /// 为指定的排列子视图之后设置自定义间距
     ///
     /// - Parameters:
     ///   - spacing: 自定义间距值
